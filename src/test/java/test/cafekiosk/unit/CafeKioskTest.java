@@ -1,6 +1,7 @@
 package test.cafekiosk.unit;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import test.cafekiosk.unit.beverage.Americano;
 import test.cafekiosk.unit.order.Order;
@@ -22,6 +23,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("현재 시간에 따라 운영시간일 경우 성공/예외")
     void createOrder(){
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
@@ -36,6 +38,7 @@ class CafeKioskTest {
 
 
     @Test
+    @DisplayName("시간을 입력받아 주문을 할 경우 운영시간이 아닌경우에 예외가 터진다.")
     void createOrderWithCurrentTime(){
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
