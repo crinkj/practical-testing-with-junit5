@@ -7,22 +7,47 @@ import test.cafekiosk.spring.api.service.product.response.ProductResponse;
 import test.cafekiosk.spring.domain.product.Product;
 import test.cafekiosk.spring.domain.product.ProductRepository;
 import test.cafekiosk.spring.domain.product.ProductSellingStatus;
+import test.cafekiosk.spring.domain.product.ProductType;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * readonly = true : 읽기전용
+ * CRUD 에서 CUD 동작 X / only Read
+ * JPA: CUD 스냅샷 저장, 변경감지 x (성능 향상)
+ *
+ * CQRS - Command / Read
+ */
 @Service
 @RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
-    public ProductResponse createProduct(ProductCreateRequest request) {
-        String latestProduct = productRepository.findLatestProduct();
 
-        return ProductResponse.of()
+    // 동시 성 이
+    public ProductResponse createProduct(ProductCreateRequest request) {
+        String nextProductNumber = createNextProductNumber();
+
+        Product product = request.toEntity(nextProductNumber);
+        Product savedProduct = productRepository.save(product);
+
+        return ProductResponse.of(savedProduct);
     }
 
-    public List<ProductResponse> getSellingProducts(){
+    private String createNextProductNumber() {
+        String latestProductNumber = productRepository.findLatestProduct();
+        if (latestProductNumber == null) {
+            return "001";
+        }
+        Integer latestProductNumberInt = Integer.parseInt(latestProductNumber);
+        int nextProductNumberInt = latestProductNumberInt + 1;
+
+        return String.format("%03d", nextProductNumberInt);
+    }
+
+
+    public List<ProductResponse> getSellingProducts() {
         List<Product> products = productRepository.findAllBySellingStatusIn(ProductSellingStatus.forDisplay());
 
         return products.stream()

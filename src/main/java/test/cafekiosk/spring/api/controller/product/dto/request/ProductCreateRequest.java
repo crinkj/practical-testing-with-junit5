@@ -2,6 +2,7 @@ package test.cafekiosk.spring.api.controller.product.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
+import test.cafekiosk.spring.domain.product.Product;
 import test.cafekiosk.spring.domain.product.ProductSellingStatus;
 import test.cafekiosk.spring.domain.product.ProductType;
 
@@ -17,5 +18,15 @@ public class ProductCreateRequest {
         this.name = name;
         this.type = type;
         this.sellingStatus = sellingStatus;
+    }
+
+    public Product toEntity(String nextProductNumber) {
+        return Product.builder()
+                .productNumber(nextProductNumber)
+                .type(type)
+                .sellingStatus(sellingStatus)
+                .name(name)
+                .price(price)
+                .build();
     }
 }
