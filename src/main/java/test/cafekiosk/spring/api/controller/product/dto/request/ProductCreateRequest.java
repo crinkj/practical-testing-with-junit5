@@ -25,7 +25,6 @@ public class ProductCreateRequest {
 
     // String name -> 상품 이름은 20자 제한
     @NotBlank(message = "상품 이름은 필수입니다.")
-    @Max(20)
     private String name;
     @NotNull(message = "상품 타입은 필수입니다.")
     private ProductType type;
