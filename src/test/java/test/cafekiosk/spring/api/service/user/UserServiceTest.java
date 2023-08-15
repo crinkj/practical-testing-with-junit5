@@ -7,15 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import test.cafekiosk.spring.IntegrationTestSupport;
 import test.cafekiosk.spring.api.service.user.request.UserJoinRequest;
 import test.cafekiosk.spring.api.service.user.response.UserResponse;
 import test.cafekiosk.spring.domain.user.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class UserServiceTest {
+class UserServiceTest extends IntegrationTestSupport {
     @Autowired
     private UserService userService;
 

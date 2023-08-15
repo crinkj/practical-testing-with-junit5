@@ -54,7 +54,7 @@ class ProductRepositoryTest {
         productRepository.saveAll(List.of(product1, product2, product3));
 
         //when
-        List<Product> products = productRepository.findAllByProductNumberIn(List.of("001", "002 "));
+        List<Product> products = productRepository.findAllByProductNumberIn(List.of("001", "002"));
 
         //then
         Assertions.assertThat(products).hasSize(2)

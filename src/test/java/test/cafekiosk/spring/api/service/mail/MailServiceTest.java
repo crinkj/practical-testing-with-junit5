@@ -3,19 +3,17 @@ package test.cafekiosk.spring.api.service.mail;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
+import test.cafekiosk.spring.IntegrationTestSupport;
 import test.cafekiosk.spring.api.client.MailSendClient;
 import test.cafekiosk.spring.domain.history.mail.MailSendHistory;
 import test.cafekiosk.spring.domain.history.mail.MailSendHistoryRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
-class MailServiceTest {
+class MailServiceTest extends IntegrationTestSupport {
 
     @Test
     @DisplayName("메일 전송 테스트")
@@ -34,7 +32,7 @@ class MailServiceTest {
 
         // then
         Assertions.assertThat(result).isTrue();
-        Mockito.verify(mailSendHistoryRepository,times(1)).save(any(MailSendHistory.class));
+        Mockito.verify(mailSendHistoryRepository).save(any(MailSendHistory.class));
     }
 
 }

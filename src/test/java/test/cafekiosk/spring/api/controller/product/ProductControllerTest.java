@@ -8,7 +8,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import test.cafekiosk.spring.ControllerTestSupport;
 import test.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import test.cafekiosk.spring.api.service.order.OrderService;
 import test.cafekiosk.spring.api.service.product.ProductService;
 import test.cafekiosk.spring.api.service.product.response.ProductResponse;
 import test.cafekiosk.spring.domain.product.ProductSellingStatus;
@@ -23,18 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 // 컨트롤러 관련 빈들만 올려주는 어노테이션
-@WebMvcTest(controllers = ProductController.class)
-class ProductControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private ProductService productService;
-
+class ProductControllerTest extends ControllerTestSupport {
 
     @Test
     @DisplayName("신규 상품을 등록한다.")

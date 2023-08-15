@@ -3,6 +3,7 @@ package test.cafekiosk.spring.api.controller.order;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -11,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import test.cafekiosk.spring.ControllerTestSupport;
 import test.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import test.cafekiosk.spring.api.service.order.OrderService;
 
@@ -20,14 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@WebMvcTest(OrderController.class)
-class OrderControllerTest {
-
-    @Autowired
-    private MockMvc mockmvc;
-    @Autowired
-    private ObjectMapper objectMapper;
-
+class OrderControllerTest extends ControllerTestSupport {
 
     @Test
     @DisplayName("주문을 생성한다.")
@@ -38,7 +33,7 @@ class OrderControllerTest {
                 .build();
 
         // when // then
-        mockmvc.perform(
+        mockMvc.perform(
                         MockMvcRequestBuilders.post("/api/v1/orders/new")
                                 .content(objectMapper.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON)
