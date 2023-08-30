@@ -1,5 +1,6 @@
 # practical-testing-with-junit5
-junit5을 사용하여 테스트 코드 작성에 중점을 두었습니다. 밑처럼 학습.
+junit5을 사용하여 테스트 코드 작성에 중점을 두었습니다.
+<br>
 도메인 주제: 상품
 * Service Layer 테스트 코드 작성
 * Persistence Layer 테스트 코드 작성
